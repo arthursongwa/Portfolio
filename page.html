@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mes Projets - Détails</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #121212;
+    color: #eee;
+    margin: 0;
+    padding: 0 20px;
+  }
+  h1 {
+    text-align: center;
+    margin: 40px 0 20px;
+  }
+  .project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto 50px;
+  }
+  .project-card {
+    background: #222;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 10px #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+  }
+  .project-card:hover {
+    transform: translateY(-5px);
+  }
+  .project-title {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+    color: #ffd700;
+  }
+  .project-desc {
+    flex-grow: 1;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    color: #ccc;
+  }
+  button.view-btn {
+    background-color: #ffd700;
+    border: none;
+    padding: 10px 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  button.view-btn:hover {
+    background-color: #e6c200;
+  }
+
+  /* Détail projet */
+  #project-detail {
+    max-width: 900px;
+    background: #222;
+    border-radius: 16px;
+    margin: 0 auto 50px;
+    padding: 30px;
+    box-shadow: 0 0 20px #000;
+    display: none;
+    animation: fadeInScale 0.4s forwards;
+  }
+  #project-detail.active {
+    display: block;
+  }
+  #project-detail h2 {
+    color: #ffd700;
+    margin-bottom: 15px;
+  }
+  #project-detail p.description {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    color: #ddd;
+  }
+  #project-detail .tech-stack {
+    margin-bottom: 20px;
+  }
+  #project-detail .tech-stack span {
+    background: #444;
+    padding: 6px 10px;
+    border-radius: 12px;
+    margin-right: 8px;
+    font-size: 0.85rem;
+    color: #eee;
+  }
+  #project-detail .images {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    overflow-x: auto;
+  }
+  #project-detail .images img {
+    height: 150px;
+    border-radius: 12px;
+    box-shadow: 0 0 8px #000;
+    flex-shrink: 0;
+  }
+  #project-detail .links a {
+    color: #ffd700;
+    margin-right: 20px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  #project-detail .links a:hover {
+    text-decoration: underline;
+  }
+  #close-detail {
+    display: inline-block;
+    margin-top: 10px;
+    background: #444;
+    padding: 8px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #eee;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+  }
+  #close-detail:hover {
+    background: #555;
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .project-list {
+      grid-template-columns: 1fr;
+    }
+    #project-detail .images {
+      flex-direction: column;
+      overflow-x: visible;
+    }
+    #project-detail .images img {
+      width: 100%;
+      height: auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Mes Projets</h1>
+
+<div class="project-list" id="projectList">
+  <!-- Projets générés par JS -->
+</div>
+
+<div id="project-detail">
+  <h2 id="detailTitle"></h2>
+  <p class="description" id="detailDesc"></p>
+  <div class="tech-stack" id="detailTech"></div>
+  <div class="images" id="detailImages"></div>
+  <div class="links" id="detailLinks"></div>
+  <span id="close-detail">Retour à la liste</span>
+</div>
+
+<script>
+  const projects = [
+    {
+      id: 1,
+      title: "Site E-commerce Vêtements",
+      shortDesc: "Création d’un site de vente en ligne responsive avec panier et paiement sécurisé.",
+      description: "Ce projet consistait à développer un site e-commerce complet pour une boutique de vêtements, intégrant un système de gestion des stocks, un panier dynamique, et une interface utilisateur intuitive optimisée pour mobile.",
+      tech: ["React", "Node.js", "Stripe API", "Tailwind CSS"],
+      images: [
+        "https://via.placeholder.com/300x150?text=Homepage",
+        "https://via.placeholder.com/300x150?text=Produit",
+        "https://via.placeholder.com/300x150?text=Panier"
+      ],
+      links: [
+        { url: "https://github.com/arthursongwa/ecommerce", label: "GitHub" },
+        { url: "https://mon-ecommerce-demo.com", label: "Live Demo" }
+      ]
+    },
+    {
+      id: 2,
+      title: "Jeu Vidéo 2D Platformer",
+      shortDesc: "Un jeu vidéo de plateforme développé avec Godot Engine, avec niveaux et ennemis variés.",
+      description: "Développement d’un jeu 2D de type platformer avec plusieurs niveaux, des ennemis aux comportements variés, et un système de collecte d’objets. Projet réalisé en C# avec Godot Engine.",
+      tech: ["Godot", "C#", "Tiled Map Editor"],
+      images: [
+        "https://via.placeholder.com/300x150?text=Level+1",
+        "https://via.placeholder.com/300x150?text=Gameplay",
+        "https://via.placeholder.com/300x150?text=Menu"
+      ],
+      links: [
+        { url: "https://github.com/arthursongwa/2d-platformer", label: "GitHub" }
+      ]
+    },
+    {
+      id: 3,
+      title: "Portfolio Personnel",
+      shortDesc: "Site web pour présenter mes projets, compétences et contact.",
+      description: "Mon portfolio personnel développé en HTML, CSS et JavaScript, avec un design moderne, responsive et une interface utilisateur soignée. Comprend une section pour télécharger mon CV et des animations CSS.",
+      tech: ["HTML", "CSS", "JavaScript", "Tailwind CSS"],
+      images: [
+        "https://via.placeholder.com/300x150?text=Accueil",
+        "https://via.placeholder.com/300x150?text=Projets",
+        "https://via.placeholder.com/300x150?text=Contact"
+      ],
+      links: [
+        { url: "https://arthursongwa.com", label: "Site" },
+        { url: "https://github.com/arthursongwa/portfolio", label: "GitHub" }
+      ]
+    }
+  ];
+
+  const projectListEl = document.getElementById('projectList');
+  const detailEl = document.getElementById('project-detail');
+  const detailTitle = document.getElementById('detailTitle');
+  const detailDesc = document.getElementById('detailDesc');
+  const detailTech = document.getElementById('detailTech');
+  const detailImages = document.getElementById('detailImages');
+  const detailLinks = document.getElementById('detailLinks');
+  const closeDetail = document.getElementById('close-detail');
+
+  // Affiche la liste des projets
+  function renderProjectList() {
+    projectListEl.innerHTML = '';
+    projects.forEach(proj => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+
+      card.innerHTML = `
+        <h3 class="project-title">${proj.title}</h3>
+        <p class="project-desc">${proj.shortDesc}</p>
+        <button class="view-btn" data-id="${proj.id}">Voir</button>
+      `;
+
+      projectListEl.appendChild(card);
+    });
+  }
+
+  // Affiche le détail d’un projet
+  function showProjectDetail(id) {
+    const proj = projects.find(p => p.id === id);
+    if (!proj) return;
+
+    detailTitle.textContent = proj.title;
+    detailDesc.textContent = proj.description;
+
+    // Tech stack
+    detailTech.innerHTML = '';
+    proj.tech.forEach(t => {
+      const span = document.createElement('span');
+      span.textContent = t;
+      detailTech.appendChild(span);
+    });
+
+    // Images
+    detailImages.innerHTML = '';
+    proj.images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `${proj.title} screenshot`;
+      detailImages.appendChild(img);
+    });
+
+    // Liens
+    detailLinks.innerHTML = '';
+    proj.links.forEach(link => {
+      const a = document.createElement('a');
+      a.href = link.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = link.label;
+      detailLinks.appendChild(a);
+    });
+
+    detailEl.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Cacher détail
+  closeDetail.addEventListener('click', () => {
+    detailEl.classList.remove('active');
+  });
+
+  // Gérer click voir
+  projectListEl.addEventListener('click', (e) => {
+    if (e.target.classList.contains('view-btn')) {
+      const id = parseInt(e.target.getAttribute('data-id'), 10);
+      showProjectDetail(id);
+    }
+  });
+
+  renderProjectList();
+</script>
+
+</body>
+</html>
