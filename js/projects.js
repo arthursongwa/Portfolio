@@ -6,7 +6,8 @@
       image: "img.jpg",
       status: "En cours",
       statusColor: "bg-yellow-500",
-      link: "page.html"
+      link: "page.html",
+    date: "12 mai 2025"
     },
     {
       title: "Dashboard Web Stats",
@@ -14,7 +15,8 @@
       image: "img.jpg",
       status: "Fini",
       statusColor: "bg-green-500",
-      link: "page.html"
+      link: "page.html",
+    date: "12 mai 2025"
     },
     {
       title: "Jeu éducatif enfants",
@@ -22,7 +24,8 @@
       image: "img.jpg",
       status: "Prototype",
       statusColor: "bg-purple-500",
-      link: "page.html"
+      link: "page.html",
+    date: "12 mai 2025"
     },
     {
       title: "Suivi Hydratation",
@@ -30,9 +33,11 @@
       image: "img.jpg",
       status: "En pause",
       statusColor: "bg-red-500",
-      link: "page.html"
+      link: "page.html",
+    date: "12 mai 2025"
     }
   ];
+  
 
   const projectsContainer = document.getElementById("projectsContainer");
 
@@ -41,6 +46,10 @@
     card.className = "bg-gray-800 rounded-2xl overflow-hidden shadow-lg shine-effect relative";
 
     card.innerHTML = `
+      <span class="absolute top-2 left-2 bg-blue-500 text-xs font-bold text-black px-2 py-1 rounded-full shadow">
+        ${project.date}
+      </span>
+
       <span class="absolute top-2 right-2 ${project.statusColor} text-xs font-bold text-black px-2 py-1 rounded-full shadow">
         ${project.status}
       </span>
@@ -50,8 +59,9 @@
       <div class="p-4">
         <h4 class="text-xl font-semibold">${project.title}</h4>
         <p class="text-gray-400 mt-2">${project.description}</p>
+
         <div class="mt-4 flex justify-between items-center">
-          <a href="${project.link}" target="_blank" class="text-blue-400 hover:underline">Voir</a>
+          <a href="page.html" target="_blank" class="text-blue-400 hover:underline">Voir</a>
           <button class="text-green-400 hover:underline">Partager</button>
         </div>
       </div>

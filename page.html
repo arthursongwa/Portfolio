@@ -1,311 +1,118 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mes Projets - Détails</title>
-<style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #121212;
-    color: #eee;
-    margin: 0;
-    padding: 0 20px;
-  }
-  h1 {
-    text-align: center;
-    margin: 40px 0 20px;
-  }
-  .project-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto 50px;
-  }
-  .project-card {
-    background: #222;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 0 10px #000;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.3s ease;
-  }
-  .project-card:hover {
-    transform: translateY(-5px);
-  }
-  .project-title {
-    font-size: 1.25rem;
-    margin-bottom: 8px;
-    color: #ffd700;
-  }
-  .project-desc {
-    flex-grow: 1;
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-    color: #ccc;
-  }
-  button.view-btn {
-    background-color: #ffd700;
-    border: none;
-    padding: 10px 16px;
-    font-weight: 600;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  button.view-btn:hover {
-    background-color: #e6c200;
-  }
-
-  /* Détail projet */
-  #project-detail {
-    max-width: 900px;
-    background: #222;
-    border-radius: 16px;
-    margin: 0 auto 50px;
-    padding: 30px;
-    box-shadow: 0 0 20px #000;
-    display: none;
-    animation: fadeInScale 0.4s forwards;
-  }
-  #project-detail.active {
-    display: block;
-  }
-  #project-detail h2 {
-    color: #ffd700;
-    margin-bottom: 15px;
-  }
-  #project-detail p.description {
-    font-size: 1rem;
-    margin-bottom: 20px;
-    line-height: 1.5;
-    color: #ddd;
-  }
-  #project-detail .tech-stack {
-    margin-bottom: 20px;
-  }
-  #project-detail .tech-stack span {
-    background: #444;
-    padding: 6px 10px;
-    border-radius: 12px;
-    margin-right: 8px;
-    font-size: 0.85rem;
-    color: #eee;
-  }
-  #project-detail .images {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
-    overflow-x: auto;
-  }
-  #project-detail .images img {
-    height: 150px;
-    border-radius: 12px;
-    box-shadow: 0 0 8px #000;
-    flex-shrink: 0;
-  }
-  #project-detail .links a {
-    color: #ffd700;
-    margin-right: 20px;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  #project-detail .links a:hover {
-    text-decoration: underline;
-  }
-  #close-detail {
-    display: inline-block;
-    margin-top: 10px;
-    background: #444;
-    padding: 8px 14px;
-    border-radius: 12px;
-    cursor: pointer;
-    color: #eee;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-  }
-  #close-detail:hover {
-    background: #555;
-  }
-
-  @keyframes fadeInScale {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @media (max-width: 600px) {
-    .project-list {
-      grid-template-columns: 1fr;
-    }
-    #project-detail .images {
-      flex-direction: column;
-      overflow-x: visible;
-    }
-    #project-detail .images img {
-      width: 100%;
-      height: auto;
-    }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Projets</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-900 text-white font-mono">
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-800 p-5 overflow-y-auto border-r border-gray-700" id="projectSidebar"></aside>
 
-<h1>Mes Projets</h1>
+    <!-- Detail View -->
+    <main class="flex-1 p-10 overflow-y-auto" id="project-detail">
+      <h2 id="detailTitle" class="text-blue-400 text-2xl font-semibold mb-3">Sélectionne un projet</h2>
+      <p class="description mb-5" id="detailDesc"></p>
+      
+      <div class="tech-stack mb-5" id="detailTech" class="flex flex-wrap gap-2"></div>
 
-<div class="project-list" id="projectList">
-  <!-- Projets générés par JS -->
-</div>
+      <div class="images flex flex-wrap gap-4 mb-5" id="detailImages"></div>
 
-<div id="project-detail">
-  <h2 id="detailTitle"></h2>
-  <p class="description" id="detailDesc"></p>
-  <div class="tech-stack" id="detailTech"></div>
-  <div class="images" id="detailImages"></div>
-  <div class="links" id="detailLinks"></div>
-  <span id="close-detail">Retour à la liste</span>
-</div>
+      <div class="links flex flex-wrap gap-3" id="detailLinks"></div>
 
-<script>
-  const projects = [
-    {
-      id: 1,
-      title: "Site E-commerce Vêtements",
-      shortDesc: "Création d’un site de vente en ligne responsive avec panier et paiement sécurisé.",
-      description: "Ce projet consistait à développer un site e-commerce complet pour une boutique de vêtements, intégrant un système de gestion des stocks, un panier dynamique, et une interface utilisateur intuitive optimisée pour mobile.",
-      tech: ["React", "Node.js", "Stripe API", "Tailwind CSS"],
-      images: [
-        "https://via.placeholder.com/300x150?text=Homepage",
-        "https://via.placeholder.com/300x150?text=Produit",
-        "https://via.placeholder.com/300x150?text=Panier"
-      ],
-      links: [
-        { url: "https://github.com/arthursongwa/ecommerce", label: "GitHub" },
-        { url: "https://mon-ecommerce-demo.com", label: "Live Demo" }
-      ]
-    },
-    {
-      id: 2,
-      title: "Jeu Vidéo 2D Platformer",
-      shortDesc: "Un jeu vidéo de plateforme développé avec Godot Engine, avec niveaux et ennemis variés.",
-      description: "Développement d’un jeu 2D de type platformer avec plusieurs niveaux, des ennemis aux comportements variés, et un système de collecte d’objets. Projet réalisé en C# avec Godot Engine.",
-      tech: ["Godot", "C#", "Tiled Map Editor"],
-      images: [
-        "https://via.placeholder.com/300x150?text=Level+1",
-        "https://via.placeholder.com/300x150?text=Gameplay",
-        "https://via.placeholder.com/300x150?text=Menu"
-      ],
-      links: [
-        { url: "https://github.com/arthursongwa/2d-platformer", label: "GitHub" }
-      ]
-    },
-    {
-      id: 3,
-      title: "Portfolio Personnel",
-      shortDesc: "Site web pour présenter mes projets, compétences et contact.",
-      description: "Mon portfolio personnel développé en HTML, CSS et JavaScript, avec un design moderne, responsive et une interface utilisateur soignée. Comprend une section pour télécharger mon CV et des animations CSS.",
-      tech: ["HTML", "CSS", "JavaScript", "Tailwind CSS"],
-      images: [
-        "https://via.placeholder.com/300x150?text=Accueil",
-        "https://via.placeholder.com/300x150?text=Projets",
-        "https://via.placeholder.com/300x150?text=Contact"
-      ],
-      links: [
-        { url: "https://arthursongwa.com", label: "Site" },
-        { url: "https://github.com/arthursongwa/portfolio", label: "GitHub" }
-      ]
+      <span id="close-detail" class="inline-block mt-10 text-gray-400 text-sm hover:text-gray-300 cursor-pointer">← Retour</span>
+    </main>
+  </div>
+
+  <script>
+    const projects = [
+      {
+        id: "site-vitrine",
+        title: "Site Vitrine - Artiste",
+        description: "Un site vitrine responsive pour un artiste indépendant avec galerie, formulaire de contact et animations.",
+        tech: ["HTML", "CSS", "JavaScript", "GSAP"],
+        images: ["https://via.placeholder.com/200x120?text=Projet+1"],
+        links: [
+          { name: "Voir le site", url: "https://exemple.com/projet1" },
+          { name: "GitHub", url: "https://github.com/arthur/projet1" }
+        ]
+      },
+      {
+        title: "Application Nutrition",
+        description: "Application web pour suivre ses repas, calories et objectifs journaliers.",
+        tech: ["Flutter", "Firebase", "Dart"],
+        images: ["https://via.placeholder.com/200x120?text=Nutrition+App"],
+        links: [
+          { name: "Voir le projet", url: "https://exemple.com/nutrition" }
+        ]
+      },
+      {
+        title: "Jeu 3D - Godot",
+        description: "Prototype d’un jeu en vue isométrique inspiré de WorldBox. Gestion de carte, simulation et actions du joueur.",
+        tech: ["Godot", "GDScript", "Blender"],
+        images: ["https://via.placeholder.com/200x120?text=Jeu+3D"],
+        links: [
+          { name: "GitHub", url: "https://github.com/arthur/jeu3d" }
+        ]
+      }
+    ];
+
+    const sidebar = document.getElementById("projectSidebar");
+    const detailTitle = document.getElementById("detailTitle");
+    const detailDesc = document.getElementById("detailDesc");
+    const detailTech = document.getElementById("detailTech");
+    const detailImages = document.getElementById("detailImages");
+    const detailLinks = document.getElementById("detailLinks");
+    const closeBtn = document.getElementById("close-detail");
+
+    function showProjectDetail(project) {
+      detailTitle.textContent = project.title;
+      detailDesc.textContent = project.description;
+
+      detailTech.innerHTML = "";
+      project.tech.forEach(t => {
+        const span = document.createElement("span");
+        span.textContent = t;
+        span.className = "bg-gray-700 px-3 py-1 rounded text-sm mr-2 mb-2 inline-block";
+        detailTech.appendChild(span);
+      });
+
+      detailImages.innerHTML = "";
+      project.images.forEach(img => {
+        const image = document.createElement("img");
+        image.src = img;
+        image.className = "w-48 h-auto rounded-lg border-2 border-gray-700";
+        detailImages.appendChild(image);
+      });
+
+      detailLinks.innerHTML = "";
+      project.links.forEach(link => {
+        const a = document.createElement("a");
+        a.href = link.url;
+        a.target = "_blank";
+        a.textContent = link.name;
+        a.className = "bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm";
+        detailLinks.appendChild(a);
+      });
     }
-  ];
 
-  const projectListEl = document.getElementById('projectList');
-  const detailEl = document.getElementById('project-detail');
-  const detailTitle = document.getElementById('detailTitle');
-  const detailDesc = document.getElementById('detailDesc');
-  const detailTech = document.getElementById('detailTech');
-  const detailImages = document.getElementById('detailImages');
-  const detailLinks = document.getElementById('detailLinks');
-  const closeDetail = document.getElementById('close-detail');
-
-  // Affiche la liste des projets
-  function renderProjectList() {
-    projectListEl.innerHTML = '';
-    projects.forEach(proj => {
-      const card = document.createElement('div');
-      card.className = 'project-card';
-
-      card.innerHTML = `
-        <h3 class="project-title">${proj.title}</h3>
-        <p class="project-desc">${proj.shortDesc}</p>
-        <button class="view-btn" data-id="${proj.id}">Voir</button>
-      `;
-
-      projectListEl.appendChild(card);
-    });
-  }
-
-  // Affiche le détail d’un projet
-  function showProjectDetail(id) {
-    const proj = projects.find(p => p.id === id);
-    if (!proj) return;
-
-    detailTitle.textContent = proj.title;
-    detailDesc.textContent = proj.description;
-
-    // Tech stack
-    detailTech.innerHTML = '';
-    proj.tech.forEach(t => {
-      const span = document.createElement('span');
-      span.textContent = t;
-      detailTech.appendChild(span);
+    projects.forEach((p) => {
+      const item = document.createElement("div");
+      item.className = "bg-gray-700 hover:bg-gray-600 cursor-pointer p-4 rounded-lg mb-3 transition duration-200";
+      item.textContent = p.title;
+      item.onclick = () => showProjectDetail(p);
+      sidebar.appendChild(item);
     });
 
-    // Images
-    detailImages.innerHTML = '';
-    proj.images.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = `${proj.title} screenshot`;
-      detailImages.appendChild(img);
-    });
-
-    // Liens
-    detailLinks.innerHTML = '';
-    proj.links.forEach(link => {
-      const a = document.createElement('a');
-      a.href = link.url;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      a.textContent = link.label;
-      detailLinks.appendChild(a);
-    });
-
-    detailEl.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // Cacher détail
-  closeDetail.addEventListener('click', () => {
-    detailEl.classList.remove('active');
-  });
-
-  // Gérer click voir
-  projectListEl.addEventListener('click', (e) => {
-    if (e.target.classList.contains('view-btn')) {
-      const id = parseInt(e.target.getAttribute('data-id'), 10);
-      showProjectDetail(id);
-    }
-  });
-
-  renderProjectList();
-</script>
-
+    closeBtn.onclick = () => {
+      detailTitle.textContent = "Sélectionne un projet";
+      detailDesc.textContent = "";
+      detailTech.innerHTML = "";
+      detailImages.innerHTML = "";
+      detailLinks.innerHTML = "";
+    };
+  </script>
 </body>
 </html>

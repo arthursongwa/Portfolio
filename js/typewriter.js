@@ -18,19 +18,20 @@ const target = document.getElementById("typewriter");
 
 function type() {
     const mot = mots[motIndex];
+
     if (isDeleting) {
-    charIndex--;
+        charIndex--;
     } else {
-    charIndex++;
+        charIndex++;
     }
 
     target.textContent = mot.substring(0, charIndex);
 
     if (!isDeleting && charIndex === mot.length) {
-    setTimeout(() => isDeleting = true, delayBetweenWords);
+        setTimeout(() => isDeleting = true, delayBetweenWords);
     } else if (isDeleting && charIndex === 0) {
-    isDeleting = false;
-    motIndex = (motIndex + 1) % mots.length;
+        isDeleting = false;
+        motIndex = (motIndex + 1) % mots.length;
     }
 
     setTimeout(type, isDeleting ? speed / 2 : speed);
