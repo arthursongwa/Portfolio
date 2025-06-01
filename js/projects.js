@@ -61,7 +61,7 @@
         <p class="text-gray-400 mt-2">${project.description}</p>
 
         <div class="mt-4 flex justify-between items-center">
-          <a href="projects.html" target="_blank" class="text-blue-400 hover:underline">Voir</a>
+          <a href="projects.html" class="text-blue-400 hover:underline">Voir</a>
           <button class="text-green-400 hover:underline">Partager</button>
         </div>
       </div>

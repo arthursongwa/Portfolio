@@ -57,8 +57,8 @@
     <!-- Detail View -->
     <main class="flex-1 p-10 overflow-y-auto" id="project-detail">
       <div class="w-full h-64 mb-6">
-  <img src="img.jpg" alt="Bannière du projet" class="w-full h-full object-cover rounded-xl">
-</div>
+        <img src="img.jpg" alt="Bannière du projet" class="w-full h-full object-cover rounded-xl">
+      </div>
       <h2 id="detailTitle" class="text-blue-400 text-2xl font-semibold mb-3">← Sélectionne un projet</h2>
       <p class="description mb-5" id="detailDesc"></p>
       
@@ -68,7 +68,7 @@
 
       <div class="links flex flex-wrap gap-3" id="detailLinks"></div>
 
-      <span id="close-detail" class="inline-block mt-10 text-gray-400 text-sm hover:text-gray-300 cursor-pointer">← Retour</span>
+      <a href="index.html" class="inline-block mt-10 text-gray-400 text-sm hover:text-gray-300 cursor-pointer">← Retour</a>
     </main>
   </div>
 
@@ -111,7 +111,6 @@ const detailDesc = document.getElementById("detailDesc");
 const detailTech = document.getElementById("detailTech");
 const detailImages = document.getElementById("detailImages");
 const detailLinks = document.getElementById("detailLinks");
-const closeBtn = document.getElementById("close-detail");
 
 let isSidebarExpanded = true;
 let selectedProjectIndex = null;
@@ -137,9 +136,6 @@ function renderProjectButtons() {
 
     // Contenu selon sidebar
     item.textContent = isSidebarExpanded ? p.title : p.title.charAt(0);
-
-    // Taille police selon état
-    item.style.fontSize = isSidebarExpanded ? "1rem" : "1.5rem";
 
     // Garde la sélection
     if (selectedProjectIndex === index) {
@@ -193,17 +189,6 @@ function showProjectDetail(project) {
   });
 }
 
-closeBtn.onclick = () => {
-  detailTitle.textContent = "Sélectionne un projet";
-  detailDesc.textContent = "";
-  detailTech.innerHTML = "";
-  detailImages.innerHTML = "";
-  detailLinks.innerHTML = "";
-  // Désélectionne dans la sidebar
-  const prevSelected = sidebar.querySelector(".project-btn.selected");
-  if (prevSelected) prevSelected.classList.remove("selected");
-  selectedProjectIndex = null;
-};
 
 // Initialisation
 sidebar.classList.remove("collapsed");
