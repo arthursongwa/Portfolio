@@ -69,3 +69,5 @@
 
     projectsContainer.appendChild(card);
   });
+
+  projectsContainer.lastChild.className = "bg-gray-800 hidden rounded-2xl overflow-hidden shadow-lg shine-effect relative";
