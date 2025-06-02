@@ -9,22 +9,49 @@
 <link rel="stylesheet" href="style/flipcard.css">
 <link rel="stylesheet" href="style/cv-card.css">
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<style>
+  @layer base {
+    .container {
+      @apply px-4 sm:px-6 lg:px-8;
+    }
+  }
+  @keyframes slide-down {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-slide-down {
+      animation: slide-down 0.3s ease-out forwards;
+    }
+    
+</style>
 </head>
 <body class="bg-gray-900 text-white font-mono">
     <header class="p-6 bg-gray-800">
       <div class="container mx-auto flex justify-between items-center">
         <h1 class="text-2xl font-bold">Arthur Songwa</h1>
-        <nav class="space-x-4">
+        <div class="md:hidden">
+          <button id="menu-toggle" class="text-white focus:outline-none">
+            ☰
+          </button>
+        </div>
+        <nav id="menu" class="hidden md:flex space-x-4 flex-col md:flex-row absolute md:static bg-gray-800 md:bg-transparent w-full md:w-auto top-full left-0 p-4 md:p-0 z-50">
           <a href="#projects" class="hover:underline">Projets</a>
           <a href="#cv" class="hover:underline">CV</a>
           <a href="#about" class="hover:underline">À propos</a>
           <a href="#contact" class="hover:underline">Contact</a>
         </nav>
       </div>
+      <!-- MENU MOBILE DEROULANT -->
+      <div id="mobile-menu" class="hidden flex-col bg-gray-800 px-4 py-2 space-y-2 md:hidden animate-slide-down">
+        <a href="#projects" class="block hover:underline">Projets</a>
+        <a href="#cv" class="block hover:underline">CV</a>
+        <a href="#about" class="block hover:underline">À propos</a>
+        <a href="#contact" class="block hover:underline">Contact</a>
+      </div>
     </header>
     
     <section class="text-center py-20">
-        <h2 class="text-4xl font-bold mb-4">Bienvenue sur mon Portfolio</h2>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Bienvenue sur mon Portfolio</h2>
         
         <div class="text-center text-gray-300">
             Je crée <span id="typewriter" class="text-blue-400"></span>
@@ -41,7 +68,8 @@
         <a href="projects.html" class="text-blue-400 hover:underline">Voir plus...</a>
     </section>
 
-    <section id="about" class="container mx-auto px-4 pb-20">
+    <!-- About version PC -->
+    <section id="about" class="container hidden md:block mx-auto px-4 pb-20">
       <h3 class="text-3xl font-semibold mb-6">À propos de moi</h3>
       <div class="bg-gray-800 rounded-xl p-6 shadow-lg shine-effect">
         <p class="text-gray-300 leading-relaxed mb-4">
@@ -92,11 +120,58 @@
       </div>
     </section>
     
+    <!-- About version Mobile -->
+    <section id="about" class="container block md:hidden mx-auto px-4 pb-20">
+      <h3 class="text-3xl font-semibold mb-6">À propos de moi</h3>
+      <div class="bg-gray-800 rounded-xl p-6 shadow-lg shine-effect">
+        <p class="text-gray-300 leading-relaxed mb-4">
+          Je m'appelle <span class="text-green-400 font-semibold">Arthur Songwa-Nkuiga</span>, étudiant en ingénieurie à 
+          <span class="font-semibold">Polytech Tours</span>.
+          Passionné de <strong>programmation</strong>, de <strong>web design</strong> et de <strong>technologies immersives</strong>.
+        </p>
+
+        <p class="text-gray-300 leading-relaxed mb-4">
+          Mon portfolio reflète ma volonté d’apprendre et de construire des projets concrets. Vous y trouverez notamment :
+        </p>
+
+        <ul class="list-disc pl-6 text-gray-400 mb-4 space-y-1">
+          <li>Système de reconnaissance faciale</li>
+          <li>Site de streaming responsive</li>
+          <li>Application de suivi sportif</li>
+        </ul>
+
+        <p class="text-gray-300 leading-relaxed mb-4">
+          Autonome, rigoureux, avec un bon esprit d’équipe, 
+          je m’efforce de transformer chaque projet en une opportunité d’apprentissage. 
+          Mon objectif est de créer des <span class="text-blue-400 font-semibold">outils utiles</span>, <span class="text-blue-400 font-semibold">esthétiques</span> et <span class="text-blue-400 font-semibold">performants</span>.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6 text-sm mb-4">
+          <div>
+            <h4 class="text-green-400 font-semibold mb-1">Langages</h4>
+            <p class="text-gray-400">HTML, CSS, JS, PHP, Python, C/C++, SQL</p>
+          </div>
+          <div>
+            <h4 class="text-green-400 font-semibold mb-1">Compétences</h4>
+            <p class="text-gray-400">UI/UX, DAO, Conception 3D, Gestion de projet</p>
+          </div>
+        </div>
+        <p class="text-gray-300 leading-relaxed mb-4">
+          Actuellement en quête d’opportunités pour collaborer.
+        </p>
+        <div class="mt-6">
+            <a href="mailto:arthursongwa@gmail.com" id="typewriter2-text"  class="text-blue-400 hover:underline font-bold">
+              <span>📬 Un projet ? Une idée ? Parlons-en.</span>
+            </a>
+        </div>
+      </div>
+    </section>
+    
     <section id="cv" class="container mx-auto px-4 pb-20 flex items-center justify-center">
       <div class="bg-gray-800 absolute w-64 h-64 rounded-full">
             
       </div>
-      <div class="min-h-screen w-full flex items-center justify-center p-4">
+      <div class="min-h-[60vh] md:min-h-screen w-full flex items-center justify-center p-4">
         <!-- 3D Pricing Card -->
         <div class="card-3d max-w-md w-full glass-effect rounded-2xl overflow-hidden transition-all hover:shadow-2xl relative">
           <!-- Floating 3D Badge -->
@@ -189,5 +264,14 @@
     <script src="js/typewriter.js"></script>
     <script src="js/flipcard.js"></script>
     <script src="js/projects.js"></script>
+    <script>
+      const toggleBtn = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      toggleBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    </script>
+
 </body>
 </html>
