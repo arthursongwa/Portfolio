@@ -14,6 +14,10 @@ let selectedProjectIndex = null;
 // Création du bouton toggle une fois
 const toggleBtn = document.getElementById("toggleSidebar");
 
+window.addEventListener('DOMContentLoaded', () => {
+  expanded();
+});
+
 toggleBtn.addEventListener("click", () => {
   isSidebarExpanded = !isSidebarExpanded;
 
@@ -34,6 +38,27 @@ toggleBtn.addEventListener("click", () => {
     [...sidebar.querySelectorAll(".project-btn")].forEach(btn => btn.remove());
   }
 });
+
+function expanded(){
+  isSidebarExpanded = !isSidebarExpanded;
+
+  // Toggle class to collapse/expand
+  sidebar.classList.toggle("collapsed", !isSidebarExpanded);
+
+  // Change button icon
+  if(isSidebarExpanded){
+    toggleBtn.innerHTML =  `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg> `;
+  }else{
+    toggleBtn.innerHTML =  `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg> `;
+  }
+
+  // Only render if visible
+  if (isSidebarExpanded) {
+    renderProjectButtons();
+  } else {
+    [...sidebar.querySelectorAll(".project-btn")].forEach(btn => btn.remove());
+  }
+};
 
 function renderProjectButtons() {
 // Supprime tous les boutons sauf le toggle
