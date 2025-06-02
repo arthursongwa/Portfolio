@@ -9,21 +9,7 @@
 <link rel="stylesheet" href="style/flipcard.css">
 <link rel="stylesheet" href="style/cv-card.css">
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<style>
-  @layer base {
-    .container {
-      @apply px-4 sm:px-6 lg:px-8;
-    }
-  }
-  @keyframes slide-down {
-      from { opacity: 0; transform: translateY(-10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .animate-slide-down {
-      animation: slide-down 0.3s ease-out forwards;
-    }
-    
-</style>
+<link rel="stylesheet" href="style/burger.css">
 </head>
 <body class="bg-gray-900 text-white font-mono">
     <header class="p-6 bg-gray-800">
@@ -261,28 +247,6 @@
     <script src="js/typewriter.js"></script>
     <script src="js/flipcard.js"></script>
     <script src="js/projects.js"></script>
-    <script>
-      const toggleBtn = document.getElementById('menu-toggle');
-      const mobileMenu = document.getElementById('mobile-menu');
-
-      // Toggle menu on button click
-      toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Empêche le clic de se propager à document
-        mobileMenu.classList.toggle('hidden');
-      });
-
-      // Empêche les clics dans le menu de se propager
-      mobileMenu.addEventListener('click', (e) => {
-        e.stopPropagation();
-      });
-
-      // Ferme le menu si on clique ailleurs
-      document.addEventListener('click', () => {
-        if (!mobileMenu.classList.contains('hidden')) {
-          mobileMenu.classList.add('hidden');
-        }
-      });
-    </script>
-
+    <script src="js/burger.js"></script>
 </body>
 </html>
