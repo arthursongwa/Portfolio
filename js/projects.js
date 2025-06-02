@@ -26,15 +26,6 @@
       statusColor: "bg-purple-500",
       link: "page.html",
     date: "12 mai 2025"
-    },
-    {
-      title: "Suivi Hydratation",
-      description: "Application simple pour suivre sa consommation d'eau quotidienne.",
-      image: "img.jpg",
-      status: "En pause",
-      statusColor: "bg-red-500",
-      link: "page.html",
-    date: "12 mai 2025"
     }
   ];
   
@@ -69,5 +60,3 @@
 
     projectsContainer.appendChild(card);
   });
-
-  projectsContainer.lastChild.className = "bg-gray-800 hidden rounded-2xl overflow-hidden shadow-lg shine-effect relative";
