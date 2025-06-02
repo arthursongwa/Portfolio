@@ -1,4 +1,6 @@
+import { tret } from 'data.js';
 
+console.log(tret);
   const projectsDB = [
     {
       title: "Suivi Nutrition Flutter",
