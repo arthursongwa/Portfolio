@@ -1,40 +1,8 @@
-import { tret } from 'data.js';
-
-console.log(tret);
-  const projectsDB = [
-    {
-      title: "Suivi Nutrition Flutter",
-      description: "Application mobile pour suivre l’évolution physique (nutrition, entraînement, poids).",
-      image: "img.jpg",
-      status: "En cours",
-      statusColor: "bg-yellow-500",
-      link: "page.html",
-    date: "12 mai 2025"
-    },
-    {
-      title: "Dashboard Web Stats",
-      description: "Interface web pour visualiser les données d'une boutique e-commerce en temps réel.",
-      image: "img.jpg",
-      status: "Fini",
-      statusColor: "bg-green-500",
-      link: "page.html",
-    date: "12 mai 2025"
-    },
-    {
-      title: "Jeu éducatif enfants",
-      description: "Mini-jeu HTML/JS pour initier les enfants au calcul mental.",
-      image: "img.jpg",
-      status: "Prototype",
-      statusColor: "bg-purple-500",
-      link: "page.html",
-    date: "12 mai 2025"
-    }
-  ];
+import { projects } from './data.js';
   
-
   const projectsContainer = document.getElementById("projectsContainer");
 
-  projectsDB.forEach(project => {
+  projects.slice(0, 3).forEach(project => {
     const card = document.createElement("div");
     card.className = "bg-gray-800 rounded-2xl overflow-hidden shadow-lg shine-effect relative";
 

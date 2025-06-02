@@ -1,35 +1,58 @@
 // projects-data.js
 
 export const projects = [
-  {
-    id: "site-vitrine",
-    title: "Site Vitrine - Artiste",
-    description: "Un site vitrine responsive pour mettre en valeur le travail d’un artiste, avec animations douces via GSAP.",
-    tech: ["HTML", "CSS", "JavaScript", "GSAP"],
-    images: ["https://via.placeholder.com/200x120?text=Projet+1"],
-    links: [
-      { name: "Voir le site", url: "https://exemple.com/projet1" },
-      { name: "GitHub", url: "https://github.com/arthur/projet1" }
-    ]
-  },
-  {
-    id: "nutrition-app",
-    title: "Application Nutrition",
-    description: "Application web pour suivre ses repas, calories, macros et progrès physiques. Design sobre et graphique.",
-    tech: ["Flutter", "Firebase", "Dart"],
-    images: ["https://via.placeholder.com/200x120?text=Nutrition+App"],
-    links: [
-      { name: "Voir le projet", url: "https://exemple.com/nutrition" }
-    ]
-  },
-  {
-    id: "jeu-3d",
-    title: "Jeu 3D - Godot",
-    description: "Prototype d’un jeu en vue isométrique développé avec Godot. Génération procédurale et contrôles fluides.",
-    tech: ["Godot", "GDScript", "Blender"],
-    images: ["https://via.placeholder.com/200x120?text=Jeu+3D"],
-    links: [
-      { name: "GitHub", url: "https://github.com/arthur/jeu3d" }
-    ]
-  }
-];
+    {
+      title: "Suivi Nutrition Flutter",
+      description: "Application mobile pour suivre l’évolution physique (nutrition, entraînement, poids).",
+      image: "img.jpg",
+      status: "En cours",
+      statusColor: "bg-yellow-500",
+      link: "page.html",
+    date: "12 mai 2025"
+    },
+    {
+      title: "Dashboard Web Stats",
+      description: "Interface web pour visualiser les données d'une boutique e-commerce en temps réel.",
+      image: "img.jpg",
+      status: "Fini",
+      statusColor: "bg-green-500",
+      link: "page.html",
+    date: "12 mai 2025"
+    },
+    {
+      title: "Jeu éducatif enfants",
+      description: "Mini-jeu HTML/JS pour initier les enfants au calcul mental.",
+      image: "img.jpg",
+      status: "Prototype",
+      statusColor: "bg-purple-500",
+      link: "page.html",
+    date: "12 mai 2025"
+    },
+    {
+      title: "Jeu éducatif enfants",
+      description: "Mini-jeu HTML/JS pour initier les enfants au calcul mental.",
+      image: "img.jpg",
+      status: "Prototype",
+      statusColor: "bg-purple-500",
+      link: "page.html",
+    date: "12 mai 2025"
+    },
+    {
+      title: "Jeu éducatif enfants",
+      description: "Mini-jeu HTML/JS pour initier les enfants au calcul mental.",
+      image: "img.jpg",
+      status: "Prototype",
+      statusColor: "bg-purple-500",
+      link: "page.html",
+    date: "12 mai 2025"
+    },
+    {
+      title: "Jeu éducatif enfants",
+      description: "Mini-jeu HTML/JS pour initier les enfants au calcul mental.",
+      image: "img.jpg",
+      status: "Prototype",
+      statusColor: "bg-purple-500",
+      link: "page.html",
+    date: "12 mai 2025"
+    }
+  ];
