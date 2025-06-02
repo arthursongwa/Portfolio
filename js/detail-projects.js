@@ -13,14 +13,40 @@ let selectedProjectIndex = null;
 
 // Création du bouton toggle une fois
 const toggleBtn = document.getElementById("toggleSidebar");
-sidebar.appendChild(toggleBtn);
 
 toggleBtn.addEventListener("click", () => {
-isSidebarExpanded = !isSidebarExpanded;
-sidebar.classList.toggle("collapsed", !isSidebarExpanded);
-toggleBtn.textContent = isSidebarExpanded ? "←" : "→";
-renderProjectButtons();
+  isSidebarExpanded = !isSidebarExpanded;
+
+  // Toggle class to collapse/expand
+  sidebar.classList.toggle("collapsed", !isSidebarExpanded);
+
+  // Change button icon
+  toggleBtn.textContent = isSidebarExpanded ? "←" : "→";
+
+  // Only render if visible
+  if (isSidebarExpanded) {
+    renderProjectButtons();
+  } else {
+    [...sidebar.querySelectorAll(".project-btn")].forEach(btn => btn.remove());
+  }
 });
+
+// // sidebar.appendChild(toggleBtn);
+// toggleBtn.addEventListener("click", () => {
+//   isSidebarExpanded = !isSidebarExpanded;
+
+//   sidebar.classList.toggle("collapsed", !isSidebarExpanded);
+//   toggleBtn.textContent = isSidebarExpanded ? "←" : "→";
+
+//   renderProjectButtons();
+// });
+
+// toggleBtn.addEventListener("click", () => {
+// isSidebarExpanded = !isSidebarExpanded;
+// sidebar.classList.toggle("collapsed", !isSidebarExpanded);
+// toggleBtn.textContent = isSidebarExpanded ? "←" : "→";
+// renderProjectButtons();
+// });
 
 function renderProjectButtons() {
 // Supprime tous les boutons sauf le toggle

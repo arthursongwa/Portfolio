@@ -3,53 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Arthur Songwa - Mes projets</title>
+  <title>Arthur Songwa - Mes projets</title>
   <link rel="stylesheet" href="./style/projects.css">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    #projectSidebar {
+      width: 16rem; /* w-64 */
+      transition: width 0.3s ease;
+      overflow-y: auto;
+    }
+    #projectSidebar.collapsed {
+      width: 0; /* w-16 */
+      overflow: hidden;
+      padding: 0;
+    }
+    /* Style projet bouton commun */
+    .project-btn {
+      min-width: 2rem;
+      background-color: #374151; /* bg-gray-700 */
+      color: white;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      margin-bottom: 0.75rem;
+      text-align: center;
+      transition: background-color 0.2s ease, font-size 0.3s ease;
+    }
+    .project-btn:hover {
+      background-color: #3b82f6; /* bg-blue-500 */
+    }
+    .project-btn.selected {
+      background-color: #3b82f6;
+    }
+  </style>
 </head>
-<style>
-  .sidebar {
-  width: 16rem; /* 64 */
-}
-.sidebar.collapsed {
-  width: 4rem; /* 16 */
-}
-</style><style>
-  #projectSidebar {
-    width: 16rem; /* w-64 */
-    transition: width 0.3s ease;
-    overflow-y: auto;
-  }
-  #projectSidebar.collapsed {
-    width: 4rem; /* w-16 */
-  }
-  /* Style projet bouton commun */
-  .project-btn {
-    min-width: 2rem;
-    background-color: #374151; /* bg-gray-700 */
-    color: white;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    margin-bottom: 0.75rem;
-    text-align: center;
-    transition: background-color 0.2s ease, font-size 0.3s ease;
-  }
-  .project-btn:hover {
-    background-color: #3b82f6; /* bg-blue-500 */
-  }
-  .project-btn.selected {
-    background-color: #3b82f6;
-  }
-</style>
 <body class="bg-gray-900 text-white font-mono">
   <div class="flex h-screen">
     <aside class="sidebar overflow-hidden bg-gray-800 p-5 overflow-y-auto border-r border-gray-700 transition-all duration-300" id="projectSidebar">
-      <button id="toggleSidebar" class="mb-4 bg-gray-700 text-white px-2 py-1 w-8 rounded hover:bg-gray-600">
-        ←
-      </button>
+      
     </aside>
-
-
+    <button id="toggleSidebar" class="mb-4 bg-gray-700 text-white px-2 py-1 mx-2 my-2 w-8 h-8 rounded hover:bg-gray-600">←</button>
     <!-- Detail View -->
     <main class="flex-1 p-10 overflow-y-auto" id="project-detail">
       <div class="w-full h-64 mb-6 relative">
