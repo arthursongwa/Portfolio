@@ -43,30 +43,47 @@
 </style>
 <body class="bg-gray-900 text-white font-mono">
   <div class="flex h-screen">
-    <!-- Sidebar -->
-    <!-- <aside class="w-64 bg-gray-800 p-5 overflow-y-auto border-r border-gray-700" id="projectSidebar">
-      
-    </aside> -->
     <aside class="sidebar overflow-hidden bg-gray-800 p-5 overflow-y-auto border-r border-gray-700 transition-all duration-300" id="projectSidebar">
-<button id="toggleSidebar" class="mb-4 bg-gray-700 text-white px-2 py-1 w-8 rounded hover:bg-gray-600">
-  ←
-</button>
+      <button id="toggleSidebar" class="mb-4 bg-gray-700 text-white px-2 py-1 w-8 rounded hover:bg-gray-600">
+        ←
+      </button>
     </aside>
 
 
     <!-- Detail View -->
     <main class="flex-1 p-10 overflow-y-auto" id="project-detail">
-      <div class="w-full h-64 mb-6">
+      <div class="w-full h-64 mb-6 relative">
         <img src="./assets/img.jpg" alt="Bannière du projet" class="w-full h-full object-cover rounded-xl">
+        <div class="flex absolute top-1 left-2 gap-4">
+          <span class="bg-green-500 opacity-80 text-xs font-bold text-black px-2 py-2 rounded-lg">Blender</span>
+          <span class="bg-green-500 opacity-80 text-xs font-bold text-black px-2 py-2 rounded-lg">UE4</span>
+          <span class="bg-green-500 opacity-80 text-xs font-bold text-black px-2 py-2 rounded-lg">Unity</span>
+          <span class="bg-green-500 opacity-80 text-xs font-bold text-black px-2 py-2 rounded-lg">Blender</span>
+          <span class="bg-green-500 opacity-80 text-xs font-bold text-black px-2 py-2 rounded-lg">UE4</span>
+          <span class="bg-green-500 opacity-80 text-xs font-bold text-black px-2 py-2 rounded-lg">Unity</span>
+        </div>
       </div>
-      <h2 id="detailTitle" class="text-blue-400 text-2xl font-semibold mb-3">← Sélectionne un projet</h2>
-      <p class="description mb-5" id="detailDesc"></p>
+      <!-- <h2 id="detailTitle" class="text-blue-400 text-2xl font-semibold mb-3">← Sélectionne un projet</h2> -->
+      <h2 id="detailTitle" class="text-blue-400 text-2xl font-semibold mb-3">Présentation de mon projet 3D – [Nom de la scène]</h2>
+      <p class="description mb-5 text-gray-300" id="detailDesc">Dans le cadre de mon apprentissage en 3D, j’ai réalisé une scène intitulée "[Nom de la scène]". Ce projet avait pour objectif principal de développer mes compétences en modélisation, texturing, lighting, et rendu, tout en explorant un univers visuel cohérent.</p>
+      <div class="images grid gap-4 mb-5" id="detailImages" style="grid-template-areas: 'a a' 'b b'; grid-template-columns: repeat(2, 1fr);">
+        <div class="rounded-xl overflow-hidden" style="grid-area: a;">
+          <div class="grid grid-cols-2 gap-4">
+            <img class="rounded-xl w-full h-auto object-cover" src="./assets/img.jpg" alt="">
+            <img class="rounded-xl w-full h-auto object-cover" src="./assets/img.jpg" alt="">
+          </div>
+        </div>
+        <div class="rounded-xl overflow-hidden" style="grid-area: b;">
+          <img class="rounded-xl w-full h-auto object-cover" src="./assets/img.jpg" alt="">
+        </div>
+      </div>
+
       
       <div class="tech-stack mb-5" id="detailTech" class="flex flex-wrap gap-2"></div>
 
-      <div class="images flex flex-wrap gap-4 mb-5" id="detailImages"></div>
+      <!-- 
 
-      <div class="links flex flex-wrap gap-3" id="detailLinks"></div>
+      <div class="links flex flex-wrap gap-3" id="detailLinks"></div> -->
 
       <a href="index.html" class="inline-block mt-10 text-gray-400 text-sm hover:text-gray-300 cursor-pointer">← Retour</a>
     </main>
