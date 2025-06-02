@@ -1,5 +1,5 @@
 import { projects } from './data.js';
-  
+
   const projectsContainer = document.getElementById("projectsContainer");
 
   projects.slice(0, 3).forEach(project => {

@@ -56,3 +56,4 @@ export const projects = [
     date: "12 mai 2025"
     }
   ];
+
