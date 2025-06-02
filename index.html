@@ -37,7 +37,7 @@
         <nav id="menu" class="hidden md:flex space-x-4 flex-col md:flex-row absolute md:static bg-gray-800 md:bg-transparent w-full md:w-auto top-full left-0 p-4 md:p-0 z-50">
           <a href="#projects" class="hover:underline">Projets</a>
           <a href="#cv" class="hover:underline">CV</a>
-          <a href="#about" class="hover:underline">À propos</a>
+          <a href="#about1" class="hover:underline">À propos</a>
           <a href="#contact" class="hover:underline">Contact</a>
         </nav>
       </div>
@@ -45,18 +45,17 @@
       <div id="mobile-menu" class="hidden flex-col bg-gray-800 px-4 py-2 space-y-2 md:hidden animate-slide-down">
         <a href="#projects" class="block hover:underline">Projets</a>
         <a href="#cv" class="block hover:underline">CV</a>
-        <a href="#about" class="block hover:underline">À propos</a>
+        <a href="#about2" class="block hover:underline">À propos</a>
         <a href="#contact" class="block hover:underline">Contact</a>
       </div>
     </header>
     
     <section class="text-center py-20">
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Bienvenue sur mon Portfolio</h2>
-        
         <div class="text-center text-gray-300">
             Je crée <span id="typewriter" class="text-blue-400"></span>
         </div>
-        <p class="text-gray-300 text-xs md:text-lg">Développeur • Webdesign • Jeux vidéo • 3D</p>
+        <p class="text-gray-300 text-xs md:text-base">Développeur • Webdesign • Jeux vidéo • 3D</p>
     </section> 
     
     <section id="projects" class="container mx-auto px-4 pb-20">
@@ -69,7 +68,7 @@
     </section>
 
     <!-- About version PC -->
-    <section id="about" class="container hidden md:block mx-auto px-4 pb-20">
+    <section id="about1" class="container hidden md:block mx-auto px-4 pb-20">
       <h3 class="text-3xl font-semibold mb-6">À propos de moi</h3>
       <div class="bg-gray-800 rounded-xl p-6 shadow-lg shine-effect">
         <p class="text-gray-300 leading-relaxed mb-4">
@@ -121,7 +120,7 @@
     </section>
     
     <!-- About version Mobile -->
-    <section id="about" class="container block md:hidden mx-auto px-4 pb-20">
+    <section id="about2" class="container block md:hidden mx-auto px-4 pb-20">
       <h3 class="text-3xl font-semibold mb-6">À propos de moi</h3>
       <div class="bg-gray-800 rounded-xl p-6 shadow-lg shine-effect">
         <p class="text-gray-300 leading-relaxed mb-4">
@@ -266,8 +265,22 @@
       const toggleBtn = document.getElementById('menu-toggle');
       const mobileMenu = document.getElementById('mobile-menu');
 
-      toggleBtn.addEventListener('click', () => {
+      // Toggle menu on button click
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Empêche le clic de se propager à document
         mobileMenu.classList.toggle('hidden');
+      });
+
+      // Empêche les clics dans le menu de se propager
+      mobileMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+
+      // Ferme le menu si on clique ailleurs
+      document.addEventListener('click', () => {
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+        }
       });
     </script>
 
